@@ -1,4 +1,4 @@
-<project basedir=".">
+<project basedir="." default="test">
     <target name="test">
         <taskdef name="teamcity-service-message"
                  classname="org.jonnyzzz.teamcity.ant.TeamCityServiceMessageTask"

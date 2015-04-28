@@ -99,6 +99,9 @@ task test_ant_task() << {
         param(name: "p1", value: "p2")
         param(name: "p3", value: "p4")
     }
+
+
+    ant.ant(antFile: 'ant-test-project.xml')
 }
 
 task dist(dependsOn: [proguard, test_ant_task]) {
