@@ -1,0 +1,5 @@
+This package includes some parts of
+JetBrains TeamCity open-api with dependencies
+those parts are released under Apache 2.0 lincense
+for more details, see
+https://confluence.jetbrains.com/display/TCD8/Developing+Plugins+Using+Maven

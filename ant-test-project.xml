@@ -1,0 +1,18 @@
+<project basedir=".">
+    <target name="test">
+        <taskdef name="teamcity-service-message"
+                 classname="org.jonnyzzz.teamcity.ant.TeamCityServiceMessageTask"
+                >
+            <classpath>
+                <fileset dir="./build/libs" includes="TeamCity.AntMessages-*-release.jar"/>
+            </classpath>
+        </taskdef>
+
+        <teamcity-service-message name="name" value="value"/>
+        <teamcity-service-message name="name">
+            <param name="aaa" value="vvv"/>
+            <param name="aa2a" value="v2vv"/>
+        </teamcity-service-message>
+
+    </target>
+</project>
