@@ -1,6 +1,6 @@
 apply plugin: 'java'
-apply plugin: 'maven'
 
+name = "TeamCity.AntMessages"
 version = (project.hasProperty("teamcity")) ? project.teamcity["build.number"] : 'SNAPSHOT'
 
 sourceCompatibility = '1.7'
@@ -130,7 +130,7 @@ buildscript {
 
 
 def shouldDeploy(project) {
-    project.hasProperty("teamcity")
+    project.hasProperty("teamcity") && project.teamcity["deploy-url"] != null
 }
 
 if (shouldDeploy(project)) {
@@ -153,6 +153,11 @@ if (shouldDeploy(project)) {
             }
         }
     }
+}
+
+def artifactToUpload = proguardDestFile(fatJar)
+artifact {
+    archives artifactToUpload
 }
 
 task wrapper(type: Wrapper) {
