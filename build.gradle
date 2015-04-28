@@ -1,6 +1,7 @@
 apply plugin: 'java'
 
-version = 0.11
+version = (project.hasProperty("teamcity")) ? project.teamcity["build.number"] : 'SNAPSHOT'
+
 sourceCompatibility = '1.7'
 targetCompatibility = '1.7'
 
