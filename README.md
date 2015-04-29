@@ -31,11 +31,11 @@ Usage in Ant
 Enabling tasks
 --------------
 ```
-        <taskdef resource="teamcity-messages.xml">
-            <classpath>
-                <fileset dir="PATH_TO_LIBRARIES" includes="TeamCity.AntMessages-*.jar"/>
-            </classpath>
-        </taskdef>
+    <taskdef resource="teamcity-messages.xml">
+        <classpath>
+            <fileset dir="PATH_TO_LIBRARIES" includes="TeamCity.AntMessages-*.jar"/>
+        </classpath>
+    </taskdef>
 ```
 
 This antlib contains a number of macrodefs for most of TeamCity service messages
