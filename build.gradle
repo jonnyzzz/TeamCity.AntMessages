@@ -1,6 +1,5 @@
 apply plugin: 'java'
 
-name = "TeamCity.AntMessages"
 version = (project.hasProperty("teamcity")) ? project.teamcity["build.number"] : 'SNAPSHOT'
 
 sourceCompatibility = '1.7'
