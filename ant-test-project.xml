@@ -4,7 +4,7 @@
                  classname="org.jonnyzzz.teamcity.ant.TeamCityServiceMessageTask"
                 >
             <classpath>
-                <fileset dir="./build/libs" includes="TeamCity.AntMessages-*-release.jar"/>
+                <fileset dir="./build/libs-release" includes="TeamCity.AntMessages-*.jar"/>
             </classpath>
         </taskdef>
 

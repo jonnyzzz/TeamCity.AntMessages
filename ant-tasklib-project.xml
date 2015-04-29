@@ -1,12 +1,15 @@
 <project basedir="." default="test">
     <taskdef resource="teamcity-messages.xml">
         <classpath>
-            <fileset dir="./build/libs" includes="TeamCity.AntMessages-*-release.jar"/>
+            <fileset dir="./build/libs-release" includes="TeamCity.AntMessages-*.jar"/>
         </classpath>
     </taskdef>
 
 
     <target name="test">
+
+        <teamcity-build-number number="222"/>
+        <teamcity-artifacts artifacts="222"/>
 
         <teamcity-service-message name="name" value="value"/>
         <teamcity-service-message name="name">

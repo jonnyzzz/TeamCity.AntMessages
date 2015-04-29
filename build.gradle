@@ -3,8 +3,8 @@ apply plugin: 'maven'
 
 version = (project.hasProperty("teamcity")) ? project.teamcity["build.number"] : 'SNAPSHOT'
 
-sourceCompatibility = '1.7'
-targetCompatibility = '1.7'
+sourceCompatibility = '1.5'
+targetCompatibility = '1.5'
 
 configurations {
     provided
