@@ -139,13 +139,12 @@ if (shouldDeploy(project)) {
             mavenDeployer {
                 repository(url: project.teamcity["deploy-url"])
 
-                pom.project {
-                    name 'TeamCity.AntMessages'
-                    description 'TeamCity Service Messages as Ant tasks'
-                    packaging 'jar'
-                    url 'https://github.com/jonnyzzz/TeamCity.AntMessages'
-                    groupId 'org.jonnyzzz'
-                }
+                pom.name 'TeamCity.AntMessages'
+                pom.description 'TeamCity Service Messages as Ant tasks'
+                pom.packaging 'jar'
+                pom.url 'https://github.com/jonnyzzz/TeamCity.AntMessages'
+                pom.groupId 'org.jonnyzzz'
+
                 pom.whenConfigured { pom ->
                     // with fat jar approach we don't need our own modules to be declared as external dependencies
                     pom.dependencies.removeAll { !it.toString().toLowerCase().contains("ant") }
@@ -154,6 +153,9 @@ if (shouldDeploy(project)) {
         }
     }
 }
+
+//remove default artifact
+configurations.runtime.artifacts.removeAll { it.archiveTask.is jar }
 
 def artifactToUpload = proguardDestFile(fatJar)
 artifacts {
