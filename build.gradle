@@ -90,6 +90,7 @@ task jarRelease(dependsOn: [proguard, jar], type: Jar) {
     baseName = jar.baseName
     destinationDir = file(jar.destinationDir.path + "-release")
     from zipTree(proguardDestFile(fatJar))
+    from sourceSets.main.allSource
 }
 
 task test_ant_task() << {
