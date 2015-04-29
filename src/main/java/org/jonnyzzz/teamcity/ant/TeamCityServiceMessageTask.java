@@ -65,7 +65,7 @@ public class TeamCityServiceMessageTask extends Task {
     } else {
 
       final Map<String, String> paramz = new LinkedHashMap<String, String>();
-      
+
       if (myFlowId != null && myFlowId.length() > 0) {
         paramz.put("flowId", myFlowId);
       }

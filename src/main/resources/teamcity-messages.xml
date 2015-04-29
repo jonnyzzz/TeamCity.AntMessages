@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<antlib xmlns:tc="antlib:org.jonnyzzz.teamcity.ant">
+
+    <!-- https://confluence.jetbrains.com/display/TCD9/Build+Script+Interaction+with+TeamCity -->
+
+    <taskdef name="teamcity-service-message"
+             classname="org.jonnyzzz.teamcity.ant.TeamCityServiceMessageTask"/>
+
+    <macrodef name="teamcity-block-opened">
+        <attribute name="flowId" default=""/>
+        <attribute name="name"/>
+        <sequential>
+            <tc:teamcity-service-message name="blockOpened" flowId="@{flowId}">
+                <param name="name" value="@{name}"/>
+            </tc:teamcity-service-message>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="teamcity-block-closed">
+        <attribute name="flowId" default=""/>
+        <attribute name="name"/>
+        <sequential>
+            <tc:teamcity-service-message name="blockClosed" flowId="@{flowId}">
+                <param name="name" value="@{name}"/>
+            </tc:teamcity-service-message>
+        </sequential>
+    </macrodef>
+
+    <!-- TODO: reporting messages for Build Log -->
+    <!-- TODO: reporting compilation messages -->
+    <!-- TODO: reporting tests -->
+
+    <macrodef name="teamcity-artifacts">
+        <attribute name="artifacts"/>
+        <sequential>
+            <tc:teamcity-service-message name="publishArtifacts" value="@{artifacts}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="teamcity-progress">
+        <attribute name="message" default=""/>
+        <sequential>
+            <tc:teamcity-service-message name="progressMessage" value="@{message}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="teamcity-problem">
+        <attribute name="identity"/>
+        <attribute name="description"/>
+        <sequential>
+            <tc:teamcity-service-message name="buildProblem">
+                <param name="identity" value="@{identity}"/>
+                <param name="description" value="@{description}"/>
+            </tc:teamcity-service-message>
+        </sequential>
+    </macrodef>
+
+    <!-- TODO: reporting build status -->
+
+    <macrodef name="teamcity-build-number">
+        <attribute name="number"/>
+        <sequential>
+            <tc:teamcity-service-message name="buildNumber" value="@{number}"/>
+        </sequential>
+    </macrodef>
+
+
+    <macrodef name="teamcity-parameter">
+        <attribute name="prefix" default=""/>
+        <attribute name="name"/>
+        <attribute name="value"/>
+        <sequential>
+            <tc:teamcity-service-message name="setParameter">
+                <param name="name" value="@{prefix}@{name}"/>
+                <param name="value" value="@{value}"/>
+            </tc:teamcity-service-message>
+        </sequential>
+    </macrodef>
+
+
+    <macrodef name="teamcity-statistics">
+        <attribute name="key"/>
+        <attribute name="value"/>
+        <sequential>
+            <tc:teamcity-service-message name="buildStatisticValue">
+                <param name="key" value="@{key}"/>
+                <param name="value" value="@{value}"/>
+            </tc:teamcity-service-message>
+        </sequential>
+    </macrodef>
+
+
+</antlib>
