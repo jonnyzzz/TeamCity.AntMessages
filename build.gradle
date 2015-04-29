@@ -25,11 +25,6 @@ dependencies {
 
 
 task fatJar(type: Jar) {
-    manifest {
-        attributes \
-         'Implementation-Title': 'TeamCity Service Messages for Ant', \
-         'Implementation-Version': version
-    }
     baseName = project.name + '-all'
     from {
         (configurations.runtime - configurations.provided).collect {
@@ -54,6 +49,10 @@ task fatJar(type: Jar) {
     entryCompression = ZipEntryCompression.STORED
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     with jar
+}
+
+def proguardDestFile(fatJar) {
+    return new File(fatJar.destinationDir.path, project.name + "-" + version + "-release.jar")
 }
 
 task proguard(dependsOn: fatJar, type: proguard.gradle.ProGuardTask) {
@@ -81,8 +80,16 @@ task proguard(dependsOn: fatJar, type: proguard.gradle.ProGuardTask) {
     forceprocessing
 }
 
-def proguardDestFile(fatJar) {
-    return new File(fatJar.destinationDir.path, project.name + "-" + version + "-release.jar")
+task jarRelease(dependsOn: [proguard, jar], type: Jar) {
+    manifest {
+        attributes   \
+           'Implementation-Title': 'TeamCity Service Messages for Ant',   \
+           'Implementation-Version': version
+    }
+
+    baseName = jar.baseName
+    destinationDir = file(jar.destinationDir.path + "-release")
+    from zipTree(proguardDestFile(fatJar))
 }
 
 task test_ant_task() << {
@@ -106,7 +113,7 @@ task test_ant_task() << {
     ant.ant(antFile: 'ant-test-project.xml')
 }
 
-task dist(dependsOn: [proguard, test_ant_task]) {
+task dist(dependsOn: [proguard, jarRelease, test_ant_task]) {
 
 }
 
@@ -155,9 +162,10 @@ if (shouldDeploy(project)) {
     }
 }
 
-def artifactToUpload = proguardDestFile(fatJar)
+//remove default artifact
+configurations.runtime.artifacts.removeAll { it.archiveTask.is jar }
 artifacts {
-    archives artifactToUpload
+    archives jarRelease
 }
 
 task wrapper(type: Wrapper) {
