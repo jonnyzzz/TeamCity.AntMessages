@@ -155,7 +155,7 @@ if (shouldDeploy(project)) {
 }
 
 def artifactToUpload = proguardDestFile(fatJar)
-artifact {
+artifacts {
     archives artifactToUpload
 }
 
