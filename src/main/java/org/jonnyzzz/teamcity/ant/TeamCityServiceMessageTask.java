@@ -47,7 +47,7 @@ public class TeamCityServiceMessageTask extends Task {
         throw new BuildException("'value' attribute must not co-exist with 'param' sub-elements");
       }
 
-      logServiceMessage(new ServiceMessage(myName, myValue){});
+      logServiceMessage(ServiceMessage.asString(myName, myValue));
     } else {
 
       final Map<String, String> paramz = new LinkedHashMap<String, String>();
@@ -70,13 +70,13 @@ public class TeamCityServiceMessageTask extends Task {
         }
       }
 
-      logServiceMessage(new ServiceMessage(myName, paramz){});
+      logServiceMessage(ServiceMessage.asString(myName, paramz));
     }
   }
 
-  private void logServiceMessage(@NotNull final ServiceMessage message) {
+  private void logServiceMessage(@NotNull final String message) {
     final String NL = "\r\n";
-    final String text = NL + message.asString() + NL;
+    final String text = NL + message + NL;
     //TODO: may use socket or console output to make sure it's not skipped
     getProject().log(this, text, Project.MSG_WARN);
   }
