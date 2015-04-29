@@ -17,6 +17,7 @@ import java.util.Map;
  *
  */
 public class TeamCityServiceMessageTask extends Task {
+  @Nullable private String myFlowId = null;
   @Nullable private String myName = null;
   @Nullable private String myValue = null;
   private final List<KeyValuePart> myArguments = new ArrayList<KeyValuePart>();
@@ -27,6 +28,15 @@ public class TeamCityServiceMessageTask extends Task {
 
   public void setValue(@Nullable String value) {
     myValue = value;
+  }
+
+  @Nullable
+  public String getFlowId() {
+    return myFlowId;
+  }
+
+  public void setFlowId(@Nullable String flowId) {
+    myFlowId = flowId;
   }
 
   @NotNull
@@ -47,10 +57,18 @@ public class TeamCityServiceMessageTask extends Task {
         throw new BuildException("'value' attribute must not co-exist with 'param' sub-elements");
       }
 
+      if (myFlowId != null) {
+        throw new BuildException("flowId attribute is not supported for value only service message");
+      }
+
       logServiceMessage(ServiceMessage.asString(myName, myValue));
     } else {
 
       final Map<String, String> paramz = new LinkedHashMap<String, String>();
+      
+      if (myFlowId != null && myFlowId.length() > 0) {
+        paramz.put("flowId", myFlowId);
+      }
 
       for (KeyValuePart arg : myArguments) {
         final String name = arg.getName();
