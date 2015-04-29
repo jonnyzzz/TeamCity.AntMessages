@@ -13,7 +13,7 @@ Usage in Ant
     <taskdef name="teamcity-service-message"
              classname="org.jonnyzzz.teamcity.ant.TeamCityServiceMessageTask">
         <classpath>
-            <fileset dir="PATH_TO_LIBRARIES" includes="TeamCity.AntMessages-VERSION-release.jar"/>
+            <fileset dir="PATH_TO_LIBRARIES" includes="TeamCity.AntMessages-VERSION.jar"/>
         </classpath>
     </taskdef>
 
@@ -27,6 +27,19 @@ Usage in Ant
         <param name="aa2a" value="v2vv"/>
     </teamcity-service-message>
 ```
+
+Enabling tasks
+--------------
+```
+        <taskdef resource="teamcity-messages.xml">
+            <classpath>
+                <fileset dir="PATH_TO_LIBRARIES" includes="TeamCity.AntMessages-*.jar"/>
+            </classpath>
+        </taskdef>
+```
+
+This antlib contains a number of macrodefs for most of TeamCity service messages
+
 
 Building
 --------
