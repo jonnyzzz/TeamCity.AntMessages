@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 public class KeyValuePart {
   private String myName;
   private String myValue;
+  private boolean mySkipIfEmpty;
 
   @Nullable
   public String getName() {
@@ -26,5 +27,13 @@ public class KeyValuePart {
 
   public void setValue(String value) {
     myValue = value;
+  }
+
+  public boolean getSkipIfEmpty() {
+    return mySkipIfEmpty;
+  }
+
+  public void setSkipIfEmpty(boolean skipIfEmpty) {
+    mySkipIfEmpty = skipIfEmpty;
   }
 }

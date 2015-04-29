@@ -60,6 +60,10 @@ public class TeamCityServiceMessageTask extends Task {
           throw new BuildException("Some 'param' element has no 'name' attribute");
         }
 
+        if (arg.getSkipIfEmpty() && (value == null || value.length() == 0)) {
+          continue;
+        }
+
         if (value == null) {
           throw new BuildException("Some 'param' element has no 'value' attribute");
         }
