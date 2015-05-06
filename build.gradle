@@ -1,6 +1,11 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 version = (project.hasProperty("teamcity")) ? project.teamcity["build.number"] : 'SNAPSHOT'
 
 sourceCompatibility = '1.5'
