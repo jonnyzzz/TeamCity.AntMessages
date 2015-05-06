@@ -16,8 +16,7 @@ import java.util.Map;
  * @author Eugene Petrenko (eugene.petrenko@gmail.com)
  *
  */
-public class TeamCityServiceMessageTask extends Task {
-  @Nullable private String myFlowId = null;
+public class TeamCityServiceMessageTask extends TeamCityServiceMessageFlowBase {
   @Nullable private String myName = null;
   @Nullable private String myValue = null;
   private final List<KeyValuePart> myArguments = new ArrayList<KeyValuePart>();
@@ -28,15 +27,6 @@ public class TeamCityServiceMessageTask extends Task {
 
   public void setValue(@Nullable String value) {
     myValue = value;
-  }
-
-  @Nullable
-  public String getFlowId() {
-    return myFlowId;
-  }
-
-  public void setFlowId(@Nullable String flowId) {
-    myFlowId = flowId;
   }
 
   @NotNull
@@ -57,18 +47,10 @@ public class TeamCityServiceMessageTask extends Task {
         throw new BuildException("'value' attribute must not co-exist with 'param' sub-elements");
       }
 
-      if (myFlowId != null) {
-        throw new BuildException("flowId attribute is not supported for value only service message");
-      }
-
-      logServiceMessage(ServiceMessage.asString(myName, myValue));
+      logSimpleServiceMessage(myName, myValue);
     } else {
 
       final Map<String, String> paramz = new LinkedHashMap<String, String>();
-
-      if (myFlowId != null && myFlowId.length() > 0) {
-        paramz.put("flowId", myFlowId);
-      }
 
       for (KeyValuePart arg : myArguments) {
         final String name = arg.getName();
@@ -92,15 +74,8 @@ public class TeamCityServiceMessageTask extends Task {
         }
       }
 
-      logServiceMessage(ServiceMessage.asString(myName, paramz));
+      logComplexServiceMessage(myName, paramz);
     }
-  }
-
-  private void logServiceMessage(@NotNull final String message) {
-    final String NL = "\r\n";
-    final String text = NL + message + NL;
-    //TODO: may use socket or console output to make sure it's not skipped
-    getProject().log(this, text, Project.MSG_WARN);
   }
 
 }
