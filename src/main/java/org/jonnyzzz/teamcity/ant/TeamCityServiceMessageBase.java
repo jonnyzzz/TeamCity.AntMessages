@@ -8,9 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Created by jonnyzzz on 07.05.2015.
- */
 public abstract class TeamCityServiceMessageBase extends Task {
     private void logServiceMessage(@NotNull final String message) {
         final String NL = "\r\n";
@@ -34,7 +31,7 @@ public abstract class TeamCityServiceMessageBase extends Task {
 
     @NotNull
     protected final Map<String, String> map(@NotNull final String key1,
-                                      @NotNull final String value1) {
+                                            @NotNull final String value1) {
         final Map<String, String> map = new LinkedHashMap<String, String>();
         map.put(key1, value1);
         return map;
@@ -42,9 +39,9 @@ public abstract class TeamCityServiceMessageBase extends Task {
 
     @NotNull
     protected final Map<String, String> map(@NotNull final String key1,
-                                      @NotNull final String value1,
-                                      @NotNull final String key2,
-                                      @NotNull final String value2) {
+                                            @NotNull final String value1,
+                                            @NotNull final String key2,
+                                            @NotNull final String value2) {
         final Map<String, String> map = new LinkedHashMap<String, String>();
         map.put(key1, value1);
         map.put(key2, value2);

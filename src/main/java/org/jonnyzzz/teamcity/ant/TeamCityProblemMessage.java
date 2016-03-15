@@ -2,9 +2,6 @@ package org.jonnyzzz.teamcity.ant;
 
 import org.apache.tools.ant.BuildException;
 
-/**
- * Created by @jonnyzzz on 07.05.2015.
- */
 public class TeamCityProblemMessage extends TeamCityServiceMessageFlowBase {
     private String identity;
     private String description;

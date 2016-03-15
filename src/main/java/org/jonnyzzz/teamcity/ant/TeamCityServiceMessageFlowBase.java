@@ -7,9 +7,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Created by @jonnyzzz on 07.05.2015.
- */
 public abstract class TeamCityServiceMessageFlowBase extends TeamCityServiceMessageBase {
     @Nullable
     private String myFlowId = null;

@@ -1,13 +1,7 @@
 package org.jonnyzzz.teamcity.ant;
 
 import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Task;
 
-import java.util.Collections;
-
-/**
- * Created by jonnyzzz on 07.05.2015.
- */
 public class TeamCityStatisticsMessage extends TeamCityServiceMessageFlowBase {
     private String myKey;
     private String myValue;
