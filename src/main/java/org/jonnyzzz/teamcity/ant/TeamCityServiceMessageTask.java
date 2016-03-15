@@ -1,9 +1,6 @@
 package org.jonnyzzz.teamcity.ant;
 
-import jetbrains.buildServer.messages.serviceMessages.ServiceMessage;
 import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.Task;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,7 +35,7 @@ public class TeamCityServiceMessageTask extends TeamCityServiceMessageFlowBase {
 
   @Override
   public void execute() throws BuildException {
-    if (myName == null || myName.trim().isEmpty()) {
+    if (myName == null || myName.trim().length() == 0) {
       throw new BuildException("'name' attribute should be defined");
     }
 
